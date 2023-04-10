@@ -1,0 +1,17 @@
+#安装genean
+curl -o /home/xkx/softwares/ff-cn.tar.gz https://genean-static-master.oss-cn-shenzhen.aliyuncs.com/ff-cn.tar.gz
+#解压到指定文件夹
+tar -zxf /home/xkx/softwares/ff-cn.tar.gz -C /home/xkx/softwares
+#配置路径
+vim ~/.bashrc
+##在最下行添加
+alias  ferry=/home/xkx/softwares/ferry
+#按esc，输入“wq”保存退出
+source ~/.bashrc#执行命令使其生效
+ferry login<account>#登录后输入密码
+ferry project-a#查看所有项目
+ferry download [-hV] <projectNUM> <cloudpath> <localfile> [-s=‘*abc*’]#下载<项目编号><genean云盘中的存储位置><想要下载的地方>-s参数指定下载文件名中包含abc的文件
+#下载示例
+ferry download F22FTSCCKF10549_METtlkjM_0407 /soapnuke/clean/22.12_S1A_WHYD23025437_A/ /home/xkx/data/22.12water/
+ferry find download -s=running #查看当前正在下载的总进度
+ferry select<task id> #根据上一句查询结果中正在运行的task id查询子进度
