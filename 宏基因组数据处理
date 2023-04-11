@@ -36,6 +36,8 @@ conda install -p /home/xkx/anaconda3/pkgs kraken2
 conda create --prefix /home/xkx/anaconda3/pkgs/megahit-env
 #安装Megahit到指定目录
 conda install -c bioconda megahit -p /home/xkx/anaconda3/pkgs
+#用megahit融合两个数据
+
 #用megahit组装过滤后的序列
 megahit -1 /home/xkx/analysis/SRR23363385_1_paired.fastq.gz -2 /home/xkx/analysis/SRR23363385_2_paired.fastq.gz -o /home/xkx/analysis/new_megahit_output -f
 
