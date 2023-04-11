@@ -21,6 +21,11 @@ bash Anaconda3-2021.05-Linux-x86_64.sh -b -p /home/xkx/anaconda3
 wget https://www.bioinformatics.babraham.ac.uk/projects/fastqc/fastqc_v0.12.1.zip
 unzip fastqc_v0.12.1.zip
 apt-get install fastqc
+#通配符*来指定目录中所有FASTQ文件，这将运行fastqc在/data/xkx/22.12water/soapnuke/clean目录中所有以.fastq.gz结尾的文件
+fastqc -o /data/xkx/fastqc_output -t 4 /data/xkx/22.12water/soapnuke/clean/*.fastq.gz
+
+#查看fastqc结果
+lynx /data/xkx/fastqc_output 22.12_S1A_WHYD23025437_A_1_fastqc.html
 
 #安装Trimmomatic去除低质量的序列和接头序列
 wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-0.39.zip
@@ -37,7 +42,7 @@ conda create --prefix /home/xkx/anaconda3/pkgs/megahit-env
 #安装Megahit到指定目录
 conda install -c bioconda megahit -p /home/xkx/anaconda3/pkgs
 #用megahit融合两个数据
-
+megahit -1 22.12_S1A_WHYD23025437_A_1.fq.gz -2 22.12_S1A_WHYD23025437_A_2.fq.gz -o output_dir_new
 #用megahit组装过滤后的序列
 megahit -1 /home/xkx/analysis/SRR23363385_1_paired.fastq.gz -2 /home/xkx/analysis/SRR23363385_2_paired.fastq.gz -o /home/xkx/analysis/new_megahit_output -f
 
