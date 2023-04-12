@@ -37,7 +37,8 @@ conda install -p /home/xkx/anaconda3/pkgs kraken2
 #下载Kraken2数据库
 kraken2-build --download-taxonomy --db /data/xkx/database/krakendatabase
 #数据库下在/data/xkx/database/krakendatabase中
-#用conda安装Bowtie2去除宿主污染序列
+#用conda安装Bowtie2
+#去除宿主污染序列
 
 #安装megahit将过滤后的高质量序列组装成宏基因组
 #在 /home/xkx/anaconda3/pkgs 目录下创建一个名为 megahit-env 的新环境。然后你可以在该环境下安装 Megahit。
