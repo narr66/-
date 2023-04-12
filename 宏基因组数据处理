@@ -34,6 +34,9 @@ unzip Trimmomatic-0.39.zip
 conda activate base
 #用conda安装Kraken2去除污染序列
 conda install -p /home/xkx/anaconda3/pkgs kraken2
+#下载Kraken2数据库
+kraken2-build --download-taxonomy --db /data/xkx/database/krakendatabase
+#数据库下在/data/xkx/database/krakendatabase中
 #用conda安装Bowtie2去除宿主污染序列
 
 #安装megahit将过滤后的高质量序列组装成宏基因组
