@@ -1,0 +1,11 @@
+conda常用
+#创建新的conda环境
+conda create --name<>
+#退出当前conda
+conda deactivate
+#激活conda
+conda activate
+#列出所有已经创建的conda环境
+conda info --envs
+#conda安装软件
+conda install <name>
