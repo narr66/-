@@ -9,3 +9,6 @@ conda activate
 conda info --envs
 #conda安装软件
 conda install <name>
+
+登录到服务器
+ssh xkx@211.67.26.160
