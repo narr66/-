@@ -8,7 +8,7 @@ conda activate
 #列出所有已经创建的conda环境
 conda info --envs
 #conda安装软件
-conda install <name>
+conda install -c bioconda<name>
 
 登录到服务器
 ssh xkx@211.67.26.160
