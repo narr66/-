@@ -32,6 +32,12 @@ wget http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/Trimmomatic-
 unzip Trimmomatic-0.39.zip
 激活conda环境
 conda activate base
+
+#下载基因组数据库
+#下载ncbi-genome-download
+conda install -c bioconda ncbi-genome-download
+下载数据库（archea可以替换成bacteria、fungi）
+ncbi-genome-download archaea --output /data/xkx/database/archaea
 #用conda安装Kraken2去除污染序列
 conda install -p /home/xkx/anaconda3/pkgs kraken2
 #下载Kraken2数据库
