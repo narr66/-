@@ -12,3 +12,49 @@ conda install -c bioconda<name>
 
 登录到服务器
 ssh xkx@211.67.26.160
+
+将gbff.gz格式的文件批量转换为FASTA 文件
+#下载biopython
+pip install biopython
+#给输入文件写入权限
+mkdir /data/xkx/database/bacteria/fasta
+chmod u+w /data/xkx/database/bacteria/fasta
+#进入python3
+python3
+
+检查输出文件是否有写入权限
+import os
+
+output_dir = "/data/xkx/database/bacteria/fasta"
+
+if os.access(output_dir, os.W_OK):
+    print("The output directory has write access")
+else:
+    print("The output directory does not have write access")
+
+
+import os
+import gzip
+from Bio import SeqIO
+
+
+def convert_gbff_to_fasta(input_dir, output_dir):
+    for root, dirs, files in os.walk(input_dir):
+        for file in files:
+            if file.endswith(".gbff.gz"):
+                input_file = os.path.join(root, file)
+                output_file = os.path.join(output_dir, file[:-9] + ".fasta")
+                print(f"Converting {input_file} to {output_file}...")
+                try:
+                    with gzip.open(input_file, "rt") as f_in, open(output_file, "w") as f_out:
+                        for record in SeqIO.parse(f_in, "genbank"):
+                            SeqIO.write(record, f_out, "fasta")
+                    print(f"Conversion of {input_file} to {output_file} is complete.")
+                except Exception as e:
+                    print(f"An error occurred while converting {input_file}: {e}")
+
+input_dir = "/data/xkx/database/bacteria/refseq/bacteria"
+output_dir = "/data/xkx/database/bacteria/fasta"
+
+convert_gbff_to_fasta(input_dir, output_dir)
+
