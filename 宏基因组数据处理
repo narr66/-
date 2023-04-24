@@ -57,3 +57,11 @@ megahit -1 22.12_S1A_WHYD23025437_A_1.fq.gz -2 22.12_S1A_WHYD23025437_A_2.fq.gz 
 megahit -1 /home/xkx/analysis/SRR23363385_1_paired.fastq.gz -2 /home/xkx/analysis/SRR23363385_2_paired.fastq.gz -o /home/xkx/analysis/new_megahit_output -f
 
 #用conda安装matabat从组装的宏基因组序列中提取单个细胞的软件，它的输出是每个单个细胞的基因组序列
+
+#用prodigal预测组装好的基因
+#安装prodiga
+conda create -n prodigal_env
+conda activate prodigal_env
+conda install prodigal
+#使用prodigal
+prodigal -i /data/xkx/22.12water/merge.s1/merged.contigs.fa -o /data/xkx/22.12water/merge.s1/prodigal_output.gff -a /data/xkx/22.12water/merge.s1/prodigal_protein.faa -p meta &
