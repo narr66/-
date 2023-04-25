@@ -65,3 +65,4 @@ convert_gbff_to_fasta(input_dir, output_dir)
 cat /data/xkx/database/archaea/fasta/*.fasta > archaea.fasta
 #bowtie2建库
 bowtie2-build archaea.fasta archaea_index
+#下载blast用于蛋白质序列对比
