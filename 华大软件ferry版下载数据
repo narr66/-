@@ -15,3 +15,4 @@ ferry download [-hV] <projectNUM> <cloudpath> <localfile> [-s=‘*abc*’]#下�
 ferry download F22FTSCCKF10549_METtlkjM_0407 /soapnuke/clean/22.12_S1A_WHYD23025437_A/ /home/xkx/data/22.12water/
 ferry find download -s=running #查看当前正在下载的总进度
 ferry select<task id> #根据上一句查询结果中正在运行的task id查询子进度
+ferry download xxxxxxxxxxxxxxxx -s='*abc*' # -s参数指定下载文件名中包括abc的文件
