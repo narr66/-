@@ -9,7 +9,7 @@ alias  ferry=/home/xkx/softwares/ferry
 #按esc，输入“wq”保存退出
 source ~/.bashrc#执行命令使其生效
 ferry login<account>#登录后输入密码
-ferry project-a#查看所有项目
+ferry project -a#查看所有项目
 ferry download [-hV] <projectNUM> <cloudpath> <localfile> [-s=‘*abc*’]#下载<项目编号><genean云盘中的存储位置><想要下载的地方>-s参数指定下载文件名中包含abc的文件
 #下载示例
 ferry download F22FTSCCKF10549_METtlkjM_0407 /soapnuke/clean/22.12_S1A_WHYD23025437_A/ /home/xkx/data/22.12water/
