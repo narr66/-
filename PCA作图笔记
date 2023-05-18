@@ -1,0 +1,12 @@
+library(tidyverse)
+library(factoextra)
+library(ggplot2)
+water<-read.csv("E:/master/R/RData/RData/WATER.csv",header = T)
+water
+pca_water<- prcomp(water[,3:12],scale = TRUE)
+summary(pca_water)
+df_water<-data.frame(pca_water$x, group = water$group)
+head(df_water,3)
+fviz_pca_biplot(pca_water, label = "var", habillage = water$group,
+                addEllipses = TRUE, ellipse.level = 0.95,
+                ggtheme = theme_minimal())
