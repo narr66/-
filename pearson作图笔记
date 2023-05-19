@@ -1,0 +1,29 @@
+直接复制Excel中整理好的数据然后粘贴到SPSS界面
+分析 → 相关 → 双变量
+将左侧变量纳入右侧变量框内，点击选项，勾选平均值和标准差，点击继续
+点击皮尔逊→双尾→标记显著相关性
+
+
+R里作pearson
+# 读取数据
+water <- read.csv("E:/BIOMASTER/R/RData/RData/WATER.csv", header = TRUE)
+
+# 提取第三到第十二列作为新的数据框
+data <- water[, 3:12]
+
+# 计算相关系数矩阵
+cor_matrix <- cor(data, method = "pearson")
+接下来，将相关系数矩阵转换为热图所需的格式。你可以使用R中的heatmap()函数来创建热图。在创建热图之前，你需要确保相关系数矩阵是一个数值矩阵，而不是数据框。使用以下代码将相关系数矩阵转换为数值矩阵
+cor_matrix <- as.matrix(cor_matrix)
+最后，使用heatmap()函数创建热图。你可以根据需要调整热图的样式和参数。
+testRes = cor.mtest(td, method="pearson",conf.level = 0.95)
+corrplot(cor_matrix, method = "color", col = addcol(100), 
+         tl.col = "black", tl.cex = 0.8, tl.srt = 45, tl.pos = "lt",
+         p.mat = testRes$p, diag = TRUE, type = 'upper',
+         sig.level = c(0.001, 0.01, 0.05), pch.cex = 1.2,
+         insig = 'label_sig', pch.col = 'grey20', order = 'AOE',
+         number.cex = 0.8)
+
+corrplot(cor_matrix, method = "number", type = "lower", col = addcol(100), 
+         tl.col = "n", tl.cex = 0.8, tl.pos = "n", order = 'AOE',
+         add = TRUE, number.cex = 0.8)
