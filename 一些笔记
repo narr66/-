@@ -66,3 +66,5 @@ cat /data/xkx/database/archaea/fasta/*.fasta > archaea.fasta
 #bowtie2建库
 bowtie2-build archaea.fasta archaea_index
 #下载blast用于蛋白质序列对比
+
+stable diffusion colab 网址：https://colab.research.google.com/drive/1Nvb-fZYovLbK2iy4TEWf5RQPR7RTQ4Zm?usp=sharing
