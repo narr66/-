@@ -53,8 +53,10 @@ conda create --prefix /home/xkx/anaconda3/pkgs/megahit-env
 conda install -c bioconda megahit -p /home/xkx/anaconda3/pkgs
 #用megahit融合两个数据
 megahit -1 22.12_S1A_WHYD23025437_A_1.fq.gz -2 22.12_S1A_WHYD23025437_A_2.fq.gz -o output_dir_new
+#激活megahit环境
+conda activate megahit_env
 #用megahit组装过滤后的序列
-megahit -1 /media/xkx/Elements/xkx/22.10water_22.5water/soapnuke/clean/22.9S3A/22.9S3A_1.fq.gz -2 /media/xkx/Elements/xkx/22.10water_22.5water/soapnuke/clean/22.9S3A/22.9S3A_2.fq.gz -o /media/xkx/Elements/xkx/megahit-output/megahit22.5WS4
+megahit -1 /media/xkx/Elements/xkx/22.10water_22.5water/soapnuke/clean/S5A/S5A_1.fq.gz -2 /media/xkx/Elements/xkx/22.10water_22.5water/soapnuke/clean/S5A/S5A_2.fq.gz -o /media/xkx/Elements/xkx/megahit-output/megahit22.5WS5
 
 #用conda安装matabat从组装的宏基因组序列中提取单个细胞的软件，它的输出是每个单个细胞的基因组序列
 
