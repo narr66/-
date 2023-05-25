@@ -71,3 +71,6 @@ stable diffusion colab 网址：https://colab.research.google.com/drive/1Nvb-fZY
 
 megahit -1 /media/xkx/Elements/xkx/22.10water_22.5water/soapnuke/clean/10.24S2A/10.24S2A_1.fq.gz -2 /media/xkx/Elements/xkx/22.10water_22.5water/soapnuke/clean/10.24S2A/10.24S2A_2.fq.gz -o /media/xkx/Elements/xkx/megahit-output/megahit22.10WS2 & 
 
+id=${ftpfilepaths##*/}
+wget ${ftpfilepaths}/${id}_genomic.fna.gz 
+gunzip ${id}_genomic.fna.gz
