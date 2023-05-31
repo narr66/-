@@ -1,7 +1,7 @@
 library(tidyverse)
 library(factoextra)
 library(ggplot2)
-water<-read.csv("E:/master/R/RData/RData/WATER.csv",header = T)
+water<-read.csv("E:/BIOMASTER/R/RData/RData/WATER.csv",header = T)
 water
 pca_water<- prcomp(water[,3:12],scale = TRUE)
 summary(pca_water)
