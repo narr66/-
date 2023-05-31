@@ -14,23 +14,48 @@
 打印服务选择导出为pdf,点到外观更改名称为“因变量+自变量”
 点击打印，选择保存到论文用图文件夹
 
+方差齐次性检验
+# 加载需要的包
+library(readr)
+library(car)
+
+# 读入数据
+df <- read_csv("E:/BIOMASTER/R/RData/RData/WATER.csv")
+
+# 参数的列名列表
+param_cols <- c("TSS","SO4","T","DO","C","pH","ORP","TN","NH","TP")  # 这里替换成你的参数列名
+
+# 对每一个参数进行Levene方差齐性检验
+for (param_col in param_cols) {
+  print(paste("Levene Test for", param_col))
+  levene_result <- car::leveneTest(df[[param_col]], df[["group"]])  # 这里替换成你的分组列名
+  print(levene_result)
+}
+
+# 对每一个参数进行Shapiro-Wilk正态性检验
+for (param_col in param_cols) {
+  print(paste("Shapiro-Wilk Test for", param_col))
+  shapiro_result <- shapiro.test(df[[param_col]])
+  print(shapiro_result)
+}
 
 
-可视化
+
+wilcox.test并可视化
 
 library(dunn.test)
 
 library(ggplot2)
 
-df <- read.csv("E:/BIOMASTER/R/RData/RData/WATER.csv")
+df <- read.csv("E:/BIOMASTER/R/RData/RData/soil.csv")
 
-df[[13]] <- as.factor(df[[13]])
+df[[7]] <- as.factor(df[[7]])
 
-mwu_result <- wilcox.test(df[[12]] ~ df[[13]], exact = FALSE)
+mwu_result <- wilcox.test(df[[6]] ~ df[[7]], exact = FALSE)
 
 print(mwu_result)
 
-star_y_position <- max(df[[12]]) + 0.05 * (max(df[[12]]) - min(df[[12]]))
+star_y_position <- max(df[[6]]) + 0.05 * (max(df[[6]]) - min(df[[6]]))
 
 if (mwu_result$p.value < 0.001) {
     star_label <- '***'
@@ -48,19 +73,25 @@ if (mwu_result$p.value < 0.001) {
      label = star_label
 )
 
-p <- ggplot(df, aes(x = group, y = TP)) + 
+p <- ggplot(df, aes(x = group, y = OM)) + 
  geom_boxplot() + geom_text(data = star_df, aes(x = x, y = y, label = label)) +
  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 print(p)
 
 # 执行Mann-Whitney U检验
-test_result <- wilcox.test(df[[11]]~df[[13]])
+test_result <- wilcox.test(df[[4]]~df[[7]])
 
 # 计算Z值
-n1 <- length(df[[11]][df[[13]] == levels(df[[13]])[1]])
-n2 <- length(df[[11]][df[[13]] == levels(df[[13]])[2]])
+n1 <- length(df[[4]][df[[7]] == levels(df[[7]])[1]])
+n2 <- length(df[[4]][df[[7]] == levels(df[[7]])[2]])
 U <- min(test_result$statistic, n1*n2 + n1*(n1+1)/2 - test_result$statistic)
 Z = (U - n1*n2/2) / sqrt(n1*n2 * (n1+n2+1) / 12)
 
 print(Z)
+
+z_value = -4.123  # 这里填入你的Z值
+p_value = 2 * (1 - pnorm(abs(z_value)))  # 计算两尾检验的p值
+
+
+
