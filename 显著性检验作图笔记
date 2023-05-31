@@ -1,0 +1,66 @@
+显著性检验作图笔记
+
+方差齐次性检验过程：打开origin-统计-方差分析-单因素方差分析-打开对话框
+  在输入界面，将自变量选入因子框中，因变量选入数据框中
+    在均值比较页面，选择tukey,方差齐性检验，选第一个。
+正态性检验：分析-描述统计-探索-月份选入因子，数据选入因变量-绘图-默认＋含检验的正态图-继续-statistic-百分位图-确定
+在输出结果中点常态检定，样本数大于2000看KS栏，小于2000看SW栏。不显著说明可能符合正态分布，显著说明不符合正态分布
+百分位图用于作Zp表
+若未通过，选择使用不需要方差其次的非参数检验
+打开spss,导入数据后，分析-非参数检验-独立样本
+目标按默认选择第一个
+字段中将自变量选入下方框中，因变量选入上方框中，点击运行
+弹出结果双击结果方框，进入模型查看器，点右半边左上角第三个图标
+打印服务选择导出为pdf,点到外观更改名称为“因变量+自变量”
+点击打印，选择保存到论文用图文件夹
+
+
+
+可视化
+
+library(dunn.test)
+
+library(ggplot2)
+
+df <- read.csv("E:/BIOMASTER/R/RData/RData/WATER.csv")
+
+df[[13]] <- as.factor(df[[13]])
+
+mwu_result <- wilcox.test(df[[12]] ~ df[[13]], exact = FALSE)
+
+print(mwu_result)
+
+star_y_position <- max(df[[12]]) + 0.05 * (max(df[[12]]) - min(df[[12]]))
+
+if (mwu_result$p.value < 0.001) {
+    star_label <- '***'
+} else if (mwu_result$p.value < 0.01) {
+    star_label <- '**'
+} else if (mwu_result$p.value < 0.05) {
+    star_label <- '*'
+} else {
+    star_label <- ''
+}
+
+ star_df <- data.frame(
+    x = 2,  # 根据你的数据调整这个值
+    y = star_y_position,
+     label = star_label
+)
+
+p <- ggplot(df, aes(x = group, y = TP)) + 
+ geom_boxplot() + geom_text(data = star_df, aes(x = x, y = y, label = label)) +
+ theme(axis.text.x = element_text(angle = 90, hjust = 1))
+
+print(p)
+
+# 执行Mann-Whitney U检验
+test_result <- wilcox.test(df[[11]]~df[[13]])
+
+# 计算Z值
+n1 <- length(df[[11]][df[[13]] == levels(df[[13]])[1]])
+n2 <- length(df[[11]][df[[13]] == levels(df[[13]])[2]])
+U <- min(test_result$statistic, n1*n2 + n1*(n1+1)/2 - test_result$statistic)
+Z = (U - n1*n2/2) / sqrt(n1*n2 * (n1+n2+1) / 12)
+
+print(Z)
